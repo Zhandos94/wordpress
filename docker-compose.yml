@@ -1,22 +1,19 @@
 services:
   db:
+    container_name: wordpress_db
     image: mariadb
-#    command: '--default-authentication-plugin=mysql_native_password'
     volumes:
       - db_data:/var/lib/mysql
-    restart: always
     environment:
-#      - MYSQL_ROOT_PASSWORD=somewordpress
+      - MYSQL_ROOT_PASSWORD=wordpress
       - MYSQL_DATABASE=wordpress
       - MYSQL_USER=wordpress
       - MYSQL_PASSWORD=wordpress
     ports:
       - 3306:3306
-#    expose:
-#      - 3306
-#      - 33060
 
   wordpress:
+    container_name: wordpress_api
     build:
       context: .
       dockerfile: './Dockerfile'
@@ -24,7 +21,6 @@ services:
       - ./www:/var/www/html
     ports:
       - 8080:80
-    restart: always
     environment:
       - WORDPRESS_DB_HOST=db
       - WORDPRESS_DB_USER=wordpress
@@ -33,4 +29,3 @@ services:
 
 volumes:
   db_data:
-  db_wordpress_data:
