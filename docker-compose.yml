@@ -1,11 +1,13 @@
+version: 3.7
+
 services:
   db:
     container_name: wordpress_db
-    image: mariadb
+    image: mariadb:latest
     volumes:
       - db_data:/var/lib/mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=wordpress
+      - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=wordpress
       - MYSQL_USER=wordpress
       - MYSQL_PASSWORD=wordpress
